@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   // find all tags
   try {
     const tagData = await Tag.findAll({
-      include: [{ model: Product }],
+      include: [{ model: Product, through: ProductTag }],
     });
     res.status(200).json(tagData);
   } catch (err) {
@@ -61,7 +61,7 @@ router.delete("/:id", async (req, res) => {
       return;
     }
 
-    res.status(200).json(tagData);
+    res.status(200).json("Tag successfully deleted!");
   } catch (err) {
     res.status(500).json(err);
   }
